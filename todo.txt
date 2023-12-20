@@ -1,0 +1,17 @@
+Delete records
+Update the db with constraints, then laravel will enforce delete rules
+
+(done) PaymentTerms
+(done) with Payments Received
+(***) and Outstanding payments (not in payments received for given term) -- maybe a report per term??
+Capture PaymentsReceived
+Security of Stored files 
+
+
+cannot delete parent if it has children
+Put children and parent full names in drop-downs  (this can be done when doing pluck
+On all the list fields, put full names. search should still work
+
+attendance register
+
+
