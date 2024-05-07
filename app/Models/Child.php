@@ -77,7 +77,7 @@ class Child extends Model
     {
         if (auth()->check()) {
             static::addGlobalScope('employee', function (Builder $query) {
-                $query->where('company_id', auth()->user()->company_id);
+                $query->where('children.company_id', auth()->user()->company_id);
             });
         }
     }

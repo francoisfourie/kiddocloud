@@ -58,7 +58,7 @@ class GuardianResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('first_name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('surname')->sortable(),
-                Tables\Columns\TextColumn::make('guardian.children'),
+                //Tables\Columns\TextColumn::make('guardian.children'),
                 //Tables\Columns\TextColumn::make('children_count')->counts('children')->description(fn (Guardian $record): string => $record->childrenNames()),
                 //Tables\Columns\TextColumn::make('guardian.childrenNames')->sortable(),
                 //Tables\Columns\TextColumn::make('title')->description(fn (Guardian $record): string => $record->childrenNames())

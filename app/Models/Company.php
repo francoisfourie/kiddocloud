@@ -23,7 +23,7 @@ class Company extends Model
 
     public function children(): HasMany
     {
-        return $this->hasMany(Children::class);
+        return $this->hasMany(Child::class);
     }
 
     public function paymentTerms(): HasMany

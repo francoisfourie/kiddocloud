@@ -23,14 +23,26 @@ class ClassGroup extends Model
         return $this->belongsTo(Company::class);
     }
     
-    public function teacher(): HasOne
+    // public function teacher(): HasOne
+    // {
+    //     return $this->hasOne(Employee::class); //expand this to include only teachers
+    // }
+
+
+    public function teacher()
     {
-        return $this->hasOne(Employee::class); //expand this to include only teachers
+        return $this->belongsTo(Employee::class, 'teacher_id');
     }
 
-    public function assistant(): HasOne
+    // public function assistant(): HasOne
+    // {
+    //     return $this->hasOne(Employee::class); //expand this to only include assistants
+    // }
+
+    
+    public function assistant()
     {
-        return $this->hasOne(Employee::class); //expand this to only include assistants
+        return $this->belongsTo(Employee::class, 'assistant_id');
     }
 
     public function children(): HasMany
