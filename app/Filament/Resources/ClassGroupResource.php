@@ -45,6 +45,8 @@ class ClassGroupResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('teacher.name'),
+                Tables\Columns\TextColumn::make('description'),
                 //Tables\Columns\TextColumn::make('employee.name')->sortable(),
             ])
             ->filters([

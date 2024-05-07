@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Filament\Tables\Grouping\Group;
 
 class CompanyDocumentResource extends Resource
 {
@@ -33,8 +33,7 @@ class CompanyDocumentResource extends Resource
                 ->options([
                     'Signed Business Plan' => 'Signed Business Plan',
                     'Staff Composition' => 'Staff Composition',
-                    
-                    
+                                        
                     'Other' => 'Other'
 
                 ]),
@@ -44,7 +43,8 @@ class CompanyDocumentResource extends Resource
 
                 FileUpload::make('path')
                 ->disk('companyDocuments')
-                ->directory(Auth::user()->company_id),
+                ->directory(Auth::user()->company_id)
+                ->deletable(false),
               
                 ]);
            
@@ -90,10 +90,18 @@ class CompanyDocumentResource extends Resource
             // ])
               
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
+            ])
+            ->groups([
+                Group::make('type')
+                ->collapsible()
+                ->titlePrefixedWithLabel(false)
+            ])
+            ->defaultGroup('type');
+           // ->titlePrefixedWithLabel(false);
+            //->defaultGroup('type');
     }
 
     protected function getActionsForRecord(CompanyDocument $record): Tables\Actions\ActionGroup

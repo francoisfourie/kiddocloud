@@ -54,7 +54,7 @@ class EmployeeResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('surname')->sortable(),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('company.name')->sortable(),
+                //Tables\Columns\TextColumn::make('company.name')->sortable(),
             ])
             ->filters([
                 //
