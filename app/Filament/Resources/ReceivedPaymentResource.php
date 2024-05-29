@@ -24,7 +24,9 @@ class ReceivedPaymentResource extends Resource
     protected static ?string $model = ReceivedPayment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationGroup = 'Admin';
+    public static $title = 'Payments Received';
+    protected static ?string $navigationLabel = 'Payments';
     public static function form(Form $form): Form
     {
         return $form
