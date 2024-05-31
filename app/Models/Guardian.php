@@ -26,10 +26,15 @@ class Guardian extends Model
         return $this->belongsToMany(Child::class);
      }
 
-     public function getFullNameAttribute(): string
-     {
-         return $this->first_name . ' ' . $this->surname;
-     }
+    //  public function getFullNameAttribute(): string
+    //  {
+    //      return $this->first_name . ' ' . $this->surname;
+    //  }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->surname}";
+    }
 
     public function company(): BelongsTo
     {

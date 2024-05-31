@@ -25,7 +25,7 @@ class Employee extends Model
     //     return $this->name . ' ' . $this->surname;
     // }
 
-    public function getAnnualLeaveTakenAttribute($type): string
+    public function getAnnualLeaveTakenAttribute(): string
     {
         return $this->hasMany(LeaveApplication::class)->where('leave_type','annual leave')
         ->whereBetween('start_date', [

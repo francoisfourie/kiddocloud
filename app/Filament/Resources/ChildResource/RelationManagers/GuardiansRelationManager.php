@@ -17,39 +17,39 @@ class GuardiansRelationManager extends RelationManager
     protected static string $relationship = 'guardians';
 
     
-    public function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('first_name'),
-                Forms\Components\TextInput::make('surname'),
-                Forms\Components\Select::make('relation')
-                ->options([
-                    'Parent' => 'Parent',
-                    'Guardian' => 'Guardian',
-                ]),
+    // public function form(Form $form): Form
+    // {
+    //     return $form
+    //         ->schema([
+    //             Forms\Components\TextInput::make('first_name'),
+    //             Forms\Components\TextInput::make('surname'),
+    //             Forms\Components\Select::make('relation')
+    //             ->options([
+    //                 'Parent' => 'Parent',
+    //                 'Guardian' => 'Guardian',
+    //             ]),
 
-                Forms\Components\Select::make('title')
-                ->options([
-                    'Mr' => 'Mr',
-                    'Ms' => 'Ms',
-                    'Dr' => 'Dr',
-                ]),
+    //             Forms\Components\Select::make('title')
+    //             ->options([
+    //                 'Mr' => 'Mr',
+    //                 'Ms' => 'Ms',
+    //                 'Dr' => 'Dr',
+    //             ]),
                 
-                Forms\Components\TextInput::make('id_number'),
-                Forms\Components\Select::make('gender')
-                ->options([
-                    'male' => 'male',
-                    'female' => 'female',
-                    'other' => 'other',
-                ]),
+    //             Forms\Components\TextInput::make('id_number'),
+    //             Forms\Components\Select::make('gender')
+    //             ->options([
+    //                 'male' => 'male',
+    //                 'female' => 'female',
+    //                 'other' => 'other',
+    //             ]),
 
-                Forms\Components\TextInput::make('address'),
-                Forms\Components\TextInput::make('phone'),
-                Forms\Components\TextInput::make('email'),
+    //             Forms\Components\TextInput::make('address'),
+    //             Forms\Components\TextInput::make('phone'),
+    //             Forms\Components\TextInput::make('email'),
                 
-            ]);
-    }
+    //         ]);
+    // }
 
     public function table(Table $table): Table
     {

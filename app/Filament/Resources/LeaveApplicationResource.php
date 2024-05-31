@@ -22,7 +22,7 @@ use Filament\Tables\Filters\SelectFilter;
 class LeaveApplicationResource extends Resource
 {
     protected static ?string $model = LeaveApplication::class;
-
+    protected static ?string $navigationGroup = 'Admin';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

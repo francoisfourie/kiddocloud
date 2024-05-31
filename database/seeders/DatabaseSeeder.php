@@ -89,8 +89,8 @@ class DatabaseSeeder extends Seeder
             'company_id' => $companyUuid,
             'employee_id' => '6d10a4e7-a865-4ee1-ace4-2c77fd7a4e3f',
             'leave_type' => 'annual leave',
-            'application_date' => '2023-11-12',
-            'start_date' => '2023-11-20',
+            'application_date' => '2024-11-12',
+            'start_date' => '2024-11-20',
             'leave_days' => '1.00',
             'status' => 'approved',
         ]);
@@ -100,8 +100,8 @@ class DatabaseSeeder extends Seeder
             'company_id' => $companyUuid,
             'employee_id' => '6d10a4e7-a865-4ee1-ace4-2c77fd7a4e3f',
             'leave_type' => 'annual leave',
-            'application_date' => '2023-11-12',
-            'start_date' => '2023-11-24',
+            'application_date' => '2024-11-12',
+            'start_date' => '2024-11-24',
             'leave_days' => '2.00',
             'status' => 'approved',
         ]);
@@ -111,8 +111,8 @@ class DatabaseSeeder extends Seeder
             'company_id' => $companyUuid,
             'employee_id' => '6d10a4e7-a865-4ee1-ace4-2c77fd7a4e3f',
             'leave_type' => 'sick leave',
-            'application_date' => '2023-10-01',
-            'start_date' => '2023-10-01',
+            'application_date' => '2024-10-01',
+            'start_date' => '2024-10-01',
             'leave_days' => '3.00',
             'status' => 'approved',
         ]);
@@ -122,8 +122,8 @@ class DatabaseSeeder extends Seeder
             'company_id' => $companyUuid,
             'employee_id' => 'ab1243fe-8970-4e3c-aabd-323a7a41ec53',
             'leave_type' => 'sick leave',
-            'application_date' => '2023-10-01',
-            'start_date' => '2023-10-01',
+            'application_date' => '2024-10-01',
+            'start_date' => '2024-10-01',
             'leave_days' => '3.00',
             'status' => 'approved',
         ]);
@@ -233,7 +233,7 @@ class DatabaseSeeder extends Seeder
         DB::table('payment_terms')->insert([
             'id' => '940b5565-fcfc-4e6e-8eb9-8b18ff86b98c',
             'company_id' => $companyUuid,
-            'start_date' => '2023-10-01',
+            'start_date' => '2024-10-01',
             'end_date' => '2023-10-31',
             'name' => '2023-10'
         ]);
@@ -241,7 +241,7 @@ class DatabaseSeeder extends Seeder
         DB::table('payment_terms')->insert([
             'id' => 'ff3aea97-b7ae-41b9-9e28-52073984b5ff',
             'company_id' => $companyUuid,
-            'start_date' => '2023-11-01',
+            'start_date' => '2024-11-01',
             'end_date' => '2023-11-30',
             'name' => '2023-11'
         ]);
@@ -249,7 +249,7 @@ class DatabaseSeeder extends Seeder
         DB::table('payment_terms')->insert([
             'id' => '2ab846ed-5e30-48bd-b45c-bea568554cd7',
             'company_id' => $companyUuid,
-            'start_date' => '2023-12-01',
+            'start_date' => '2024-12-01',
             'end_date' => '2023-12-31',
             'name' => '2023-12'
         ]);

@@ -12,11 +12,14 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\NavigationLink;
 
 class CompanyResource extends Resource
 {
     protected static ?string $model = Company::class;
-
+    protected static ?string $navigationGroup = 'Settings';
+    public static $title = 'Business Details';
+    protected static ?string $navigationLabel = 'Business Details';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -63,8 +66,9 @@ class CompanyResource extends Resource
     {
         return [
             'index' => Pages\ListCompanies::route('/'),
-            'create' => Pages\CreateCompany::route('/create'),
+           // 'create' => Pages\CreateCompany::route('/create'),
             'edit' => Pages\EditCompany::route('/{record}/edit'),
         ];
     }
+
 }

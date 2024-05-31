@@ -26,6 +26,8 @@ class UnpaidChildrenResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     public static $title = 'Unpaid Children';
     protected static ?string $navigationLabel = 'Unpaid Children';
+    protected static ?string $navigationGroup = 'Admin';
+    
 
     // protected static function getFilters(): array
     // {
