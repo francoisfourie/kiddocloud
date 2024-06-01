@@ -34,7 +34,7 @@ class ReceivedPayment extends Model
     {
         if (auth()->check()) {
             static::addGlobalScope('received_payments', function (Builder $query) {
-                $query->where('company_id', auth()->user()->company_id);
+                $query->where('received_payments.company_id', auth()->user()->company_id);
             });
         }
     }
