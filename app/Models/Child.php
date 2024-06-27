@@ -73,6 +73,11 @@ class Child extends Model
         return 0 < $receivedPayments ;
     }
 
+    public function attendanceRegisters()
+    {
+        return $this->hasMany(AttendanceRegister::class);
+    }
+    
     protected static function booted(): void
     {
         if (auth()->check()) {
