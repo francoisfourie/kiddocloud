@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\DatePicker;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceList extends Page implements Tables\Contracts\HasTable
 {
@@ -24,7 +25,15 @@ class AttendanceList extends Page implements Tables\Contracts\HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(AttendanceRegister::query())
+            ->query(
+                AttendanceRegister::query()
+                    ->select('received_date', 'class_group_id')
+                    ->selectRaw('COUNT(*) as total_children')
+                    ->selectRaw('SUM(CASE WHEN present = 1 THEN 1 ELSE 0 END) as present_children')
+                    ->selectRaw("CONCAT(received_date, '-', class_group_id) as id")
+                    ->groupBy('received_date', 'class_group_id')
+            )
+            ->defaultSort('received_date', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('received_date')
                     ->label('Date')
@@ -32,14 +41,18 @@ class AttendanceList extends Page implements Tables\Contracts\HasTable
                     ->sortable(),
                 Tables\Columns\TextColumn::make('classGroup.name')
                     ->label('Class Group')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('child.first_name')
-                    ->label('Child')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('present')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('notes')
-                    ->limit(50),
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->join('class_groups', 'attendance_registers.class_group_id', '=', 'class_groups.id')
+                            ->orderBy('class_groups.name', $direction)
+                            ->select('attendance_registers.*');
+                    }),
+                Tables\Columns\TextColumn::make('total_children')
+                    ->label('Total Children')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('present_children')
+                    ->label('Present Children')
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('class_group_id')
@@ -63,11 +76,9 @@ class AttendanceList extends Page implements Tables\Contracts\HasTable
                     })
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->url(fn (AttendanceRegister $record): string => Attendance::getUrl(['received_date' => $record->received_date, 'class_group_id' => $record->class_group_id])),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\Action::make('view_details')
+                    ->label('View/Edit')
+                    ->url(fn ($record): string => Attendance::getUrl(['received_date' => $record->received_date, 'class_group_id' => $record->class_group_id])),
             ]);
     }
 
