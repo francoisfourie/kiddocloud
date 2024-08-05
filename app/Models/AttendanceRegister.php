@@ -11,13 +11,19 @@ use Illuminate\Database\Eloquent\Builder;
 class AttendanceRegister extends Model
 {
     use HasFactory;
-    use HasFactory;
     use HasUuids;
     use SoftDeletes;
     
+    protected $fillable = ['child_id', 'class_group_id', 'received_date', 'present', 'notes', 'company_id'];
+
     public function child()
     {
         return $this->belongsTo(Child::class);
+    }
+
+    public function classGroup()
+    {
+        return $this->belongsTo(ClassGroup::class);
     }
 
     protected static function booted(): void
