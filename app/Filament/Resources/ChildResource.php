@@ -63,8 +63,13 @@ class ChildResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('first_name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('surname')->sortable(),
+                Tables\Columns\TextColumn::make('full_name')
+                    ->label('Full Name')
+                    ->searchable(['first_name', 'surname'])
+                    ->sortable()
+                    ->getStateUsing(function (Child $record): string {
+                        return $record->first_name . ' ' . $record->surname;
+                    }),
                 Tables\Columns\TextColumn::make('classGroups.name')->sortable(),
             ])
             ->filters([
