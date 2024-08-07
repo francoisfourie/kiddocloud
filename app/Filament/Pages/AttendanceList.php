@@ -82,8 +82,8 @@ class AttendanceList extends Page implements Tables\Contracts\HasTable
             ]);
     }
 
-    public static function getNavigationBadge(): ?string
-    {
-        return AttendanceRegister::whereDate('received_date', today())->count();
-    }
+    // public static function getNavigationBadge(): ?string
+    // {
+    //     return AttendanceRegister::whereDate('received_date', today())->count();
+    // }
 }

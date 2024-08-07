@@ -12,6 +12,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Illuminate\Support\Collection;
@@ -55,18 +56,9 @@ class Attendance extends Page implements HasForms
                 Repeater::make('children')
                     ->schema([
                         Hidden::make('child_id'),
-                        Select::make('child_name')
-                            ->label('Child')
-                            ->options(function (callable $get) {
-                                $classGroupId = $get('../../class_group_id');
-                                if (!$classGroupId) {
-                                    return Collection::make();
-                                }
-                                return Child::where('class_group_id', $classGroupId)
-                                    ->pluck('first_name', 'id');
-                            })
-                            ->disabled()
-                            ->required(),
+                        TextInput::make('child_name')
+                            ->label('')
+                            ->disabled(),
                         Toggle::make('present')
                             ->label('Present')
                             ->default(true),
@@ -75,7 +67,9 @@ class Attendance extends Page implements HasForms
                             ->rows(2),
                     ])
                     ->columns(3)
-                    ->defaultItems(0)
+                    ->disableItemCreation()
+                    ->disableItemDeletion()
+                    ->disableItemMovement()
             ])
             ->statePath('data');
     }
@@ -94,9 +88,13 @@ class Attendance extends Page implements HasForms
 
         return $children->map(function ($child) use ($attendanceRecords) {
             $record = $attendanceRecords->get($child->id);
+            $fullName = trim("{$child->first_name} {$child->surname}");
+            if (empty($fullName)) {
+                $fullName = "Unknown Name (ID: {$child->id})";
+            }
             return [
                 'child_id' => $child->id,
-                'child_name' => $child->id,
+                'child_name' => $fullName,
                 'present' => $record ? $record->present : true,
                 'notes' => $record ? $record->notes : '',
             ];
