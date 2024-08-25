@@ -60,13 +60,14 @@ class PaymentsReceivedReport extends Report
                     ])
                     ->data(
                         function (?array $filters) {
-                             $paymentTermId = $filters['payment_term_id'] ?? null;
+                             $paymentTermId = $filters['payment_term_id'] ?? -1;
                             return ReceivedPayment::query()
-                                 ->when($paymentTermId, function ($query, $paymentTermId) {
-                                     return $query->where('payment_term_id', '=', $paymentTermId);
-                                 })
                                 ->select("payment_term_id", "received_date", "amount","first_name","surname")
                                 ->join('children', 'received_payments.child_id', '=', 'children.id')
+                                // ->when($paymentTermId, function ($query, $paymentTermId) {
+                                //     return $query->where('payment_term_id', '=', $paymentTermId);
+                                // })
+                                ->where('payment_term_id', '=', $paymentTermId)
                                 ->take(100)
                                 ->orderby('received_date','desc')
                                 ->get();
@@ -90,7 +91,7 @@ class PaymentsReceivedReport extends Report
                             ])
                             ->data(
                                 function (?array $filters) {
-                                    $paymentTermId = $filters['payment_term_id'] ?? null;
+                                    $paymentTermId = $filters['payment_term_id'] ?? -1;
                                     return Child::query()
                                     ->when($paymentTermId, function ($query, $paymentTermId) {
                                         // Exclude children with payments for the term
@@ -100,6 +101,9 @@ class PaymentsReceivedReport extends Report
                                     })
                                     ->select('children.id', 'children.first_name', 'children.surname') // Select child details
                                     ->take(100)
+                                    ->when($paymentTermId == -1, function ($query, $paymentTermId) {
+                                            return $query->where('children.id', '=', 'none');
+                                        })
                                     ->orderBy('children.first_name', 'asc') // Order by child name (optional)
                                     ->get();
                                 }
@@ -122,7 +126,7 @@ class PaymentsReceivedReport extends Report
             ->schema([
                 Select::make('payment_term_id')
                 ->label('Payment Term')
-                    ->placeholder('All')
+                    ->placeholder('Choose Term')
                     ->options(PaymentTerm::all()->pluck('name', 'id'))
             ]);
 

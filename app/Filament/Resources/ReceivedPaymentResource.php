@@ -24,22 +24,22 @@ class ReceivedPaymentResource extends Resource
     protected static ?string $model = ReceivedPayment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationGroup = 'Payments';
     public static $title = 'Payments Received';
-    protected static ?string $navigationLabel = 'Payments';
+    protected static ?string $navigationLabel = 'Received';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('received_date')
+                Forms\Components\DatePicker::make('received_date')->required()
                 ->default(now()), // Set the default value to the current datetime,
 
-                Forms\Components\Select::make('child_id')->label('Child')
+                Forms\Components\Select::make('child_id')->label('Child')->required()
                 ->options(Child::all()->pluck('full_name', 'id'))
                 ->searchable()
-                ->live(), 
+                ->live()->required(), 
                 
-                 Forms\Components\Select::make('payment_term_id')->label('Payment Term')
+                 Forms\Components\Select::make('payment_term_id')->label('Payment Term')->required()
                  ->options(PaymentTerm::all()->pluck('name', 'id')), 
                 // Forms\Components\Select::make('payment_term_id')
                 // ->relationship(name: 'payment_terms', titleAttribute: 'name'),
@@ -50,10 +50,10 @@ class ReceivedPaymentResource extends Resource
                     'card' => 'card',
                     'cash' => 'cash',
                     'other' => 'other',
-                ]),
+                ])->required(),
                
                 Forms\Components\TextInput::make('amount')
-                ->numeric(),
+                ->numeric()->required(),
                 Forms\Components\TextInput::make('reference'),
                 Forms\Components\TextInput::make('note')
 

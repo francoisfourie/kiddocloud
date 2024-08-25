@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 // Route::get('/my-component-route', function () {
@@ -49,3 +50,6 @@ Route::get('/companyDocuments/{id}/open', function ($id) {
     ];
     return response()->make(file_get_contents(storage_path('app/companyDocuments/' . $document->path)), 200, $headers);
 })->name('companyDocuments.open');
+
+// New route for user registration
+Route::post('/register', [RegistrationController::class, 'register']);
