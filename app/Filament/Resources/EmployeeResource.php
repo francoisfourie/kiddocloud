@@ -26,17 +26,17 @@ class EmployeeResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('surname'),
-                Forms\Components\TextInput::make('phone'),
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('surname')->required(),
+                Forms\Components\TextInput::make('phone')->required(),
                 Forms\Components\TextInput::make('email'),
-                Forms\Components\TextInput::make('address'),
+                Forms\Components\TextInput::make('address')->required(),
                 Forms\Components\DatePicker::make('dob')->label('Date of Birth'),
-                Forms\Components\TextInput::make('emergency_contact_name'),
-                Forms\Components\TextInput::make('emergency_contact_phone'),
+                Forms\Components\TextInput::make('emergency_contact_name')->required(),
+                Forms\Components\TextInput::make('emergency_contact_phone')->required(),
                 //Forms\Components\Select::make('employee_type_id')->relationship(name: 'employee_type', titleAttribute: 'descr'),
                 Forms\Components\Select::make('employee_type_id')->label('Employee Type')
-                ->options(EmployeeType::all()->pluck('descr', 'id')), //->relationship(name: 'employee_type', titleAttribute: 'descr')
+                ->options(EmployeeType::all()->pluck('descr', 'id'))->required(), //->relationship(name: 'employee_type', titleAttribute: 'descr')
                 
                 Forms\Components\TextInput::make('annual_leave_taken')
                         ->disabled()

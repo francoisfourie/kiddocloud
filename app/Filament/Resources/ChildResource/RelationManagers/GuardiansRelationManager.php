@@ -26,8 +26,8 @@ class GuardiansRelationManager extends RelationManager
                     ->searchable(['first_name', 'surname'])
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
-                            ->orderBy('first_name', $direction)
-                            ->orderBy('surname', $direction);
+                            ->orderBy('surname', $direction)
+                            ->orderBy('first_name', $direction);
                     })
                     ->getStateUsing(fn (Guardian $record): string => "{$record->first_name} {$record->surname}"),
                 Tables\Columns\TextColumn::make('relation'),
@@ -42,8 +42,8 @@ class GuardiansRelationManager extends RelationManager
                     ->recordSelectSearchColumns(['first_name', 'surname'])
                     ->form(fn (Tables\Actions\AttachAction $action): array => [
                         $action->getRecordSelect()
-                            ->options(fn () => Guardian::orderBy('first_name')
-                                ->orderBy('surname')
+                            ->options(fn () => Guardian::orderBy('surname')
+                                ->orderBy('first_name')
                                 ->get()
                                 ->mapWithKeys(fn (Guardian $guardian) => [$guardian->id => "{$guardian->first_name} {$guardian->surname}"])
                                 ->toArray())
@@ -59,6 +59,6 @@ class GuardiansRelationManager extends RelationManager
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
             ])
-            ->defaultSort('first_name', 'asc');
+            ->defaultSort('surname', 'asc');
     }
 }

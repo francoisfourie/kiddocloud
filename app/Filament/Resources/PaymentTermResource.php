@@ -21,9 +21,9 @@ use Illuminate\View\View;
 class PaymentTermResource extends Resource
 {
     protected static ?string $model = PaymentTerm::class;
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Payments';
     public static $title = 'Payment Terms';
-    protected static ?string $navigationLabel = 'Payment Terms';
+    protected static ?string $navigationLabel = 'Terms';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -34,6 +34,15 @@ class Employee extends Model
         ->sum('leave_days');
     }
 
+    public function getSickLeaveTakenAttribute(): string
+    {
+        return $this->hasMany(LeaveApplication::class)->where('leave_type','sick leave')
+        ->whereBetween('start_date', [
+            Carbon::now()->startOfYear(),
+            Carbon::now()->endOfYear(),])
+        ->sum('leave_days');
+    }
+
     // public function getLeaveTakenAttribute($type): 
     // {
     //     return $this->hasMany(LeaveApplication::class)->where('leave_type','annual_leave')->sum('leave_days');

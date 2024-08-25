@@ -23,13 +23,13 @@ class GuardianResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('first_name'),
-                Forms\Components\TextInput::make('surname'),
+                Forms\Components\TextInput::make('first_name')->required(),
+                Forms\Components\TextInput::make('surname')->required(),
                 Forms\Components\Select::make('relation')
                 ->options([
                     'Parent' => 'Parent',
                     'Guardian' => 'Guardian',
-                ]),
+                ])->required(),
 
                 Forms\Components\Select::make('title')
                 ->options([
@@ -46,8 +46,8 @@ class GuardianResource extends Resource
                     'other' => 'other',
                 ]),
 
-                Forms\Components\TextInput::make('address'),
-                Forms\Components\TextInput::make('phone'),
+                Forms\Components\TextInput::make('address')->required(),
+                Forms\Components\TextInput::make('phone')->required(),
                 Forms\Components\TextInput::make('email'),
             ]);
     }
@@ -69,12 +69,12 @@ class GuardianResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            // ]);
     }
 
     public static function getRelations(): array
